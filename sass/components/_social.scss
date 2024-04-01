@@ -1,0 +1,59 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: black;
+    background-color: pink;
+}
+#tracks {
+ list-style: none;
+    padding: 0;
+    height: 280px; /* Set a fixed height */
+    overflow-y:scroll;
+    max-width: 140px;
+    border-color: rgb(0, 0, 0);
+    border-width: 5px;
+    font-size: 8pt;
+    margin-left:30px;
+    padding-top:35px;
+   
+}
+#tracks li {
+  
+    text-align: left;
+    padding-bottom: 6px;
+    list-style: none;
+    
+
+}
+#tracks a {
+    text-decoration: none;
+}
+#tracks li:hover{
+    background-color:rgb(223, 223, 223) ;
+
+}
+div #container{
+    width: 400px;
+    height:400px;
+    
+    align-items: left;
+}
+#ipod{
+    max-width: 350px;
+    background-image: url(/img/ipod.svg);
+    display: block;
+    background-size: cover;
+    height: 650px;
+    align-items: center;
+    margin-top: 20px;
+}
+#play{
+    height: 20px;
+    margin-top:90px;
+    display: none;
+}
+svg{
+    width: 30px;
+    height: 30px;
+}
