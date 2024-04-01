@@ -5,6 +5,8 @@
         <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
         <link href="css/main.css" rel="stylesheet">
         <link href="css/grid.css" rel="stylesheet">
+        <script defer src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script type="module" src="js/main.js"></script>
         <title>Vue & Ajax</title>
     </head>
 
@@ -12,16 +14,36 @@
 
 
     </header>
-
+    <h1>Beyonces Top 10 hits</h1>
     <body>
-
+        <section class="grid-con" id="app">
+        <div class="col-span-full m-col-span-full l-col-start-5 l-col-span-9 xl-col-start-5 xl-col-span-9">
+            <div id="ipod">
+                <div class="l-col-span-2 xl-col-span-1" id="tracks">
+                    <ul id="song-list">
+                        <li v-for="song in songsData">
+                            <a href="#" @click="fetchSongInfo(song)">{{ song.name }} by Beyoncé</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-span-full m-col-start-1 m-col-end-13 l-col-span-full xl-col-span-full" id="songInfoCon">
+                    <div v-if="selectedTrack">
+                        <h2>{{ selectedTrack.name }}</h2>
+                        <p>Album: {{ selectedTrack.albumName }}</p>
+                        <img v-if="selectedTrack.albumPictureUrl" :src="selectedTrack.albumPictureUrl" alt="Album Image">
+                        <audio v-if="selectedTrack.audioFile" controls>
+                            <source :src="'audio/'+selectedTrack.audioFile" type="audio/mp3">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     </body>
 
     <footer>
 
-
-
     </footer>
-    <script src="js/main.js"></script>
 
 </html>
