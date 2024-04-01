@@ -5,10 +5,9 @@ This is music player application allows users to select a Beyonce song from the 
 
 ##Features
 <ul>
-<li>Song Selection: Users can browse their music library and select a song to play.</li>
+<li>Song Selection: Users can select a Beyonce song to play.</li>
 <li>Album Information: Upon selecting a song, the application displays album information including album title and artist.</li>
 <li>Album Art Display: The album art corresponding to the selected song is shown for visual enhancement.<li>
-
 <li>Music Playback: The selected song starts playing upon selection</li>
 </ul>
 ##Technologies Used
