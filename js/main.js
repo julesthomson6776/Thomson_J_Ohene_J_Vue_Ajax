@@ -43,7 +43,7 @@ createApp({
                     if (data.track) {
                         const trackInfo = data.track;
                         this.selectedTrack.albumName = trackInfo.album.title ? trackInfo.album.title[0]: 'Not available';
-                        this.selectedTrack.albumPictureUrl = trackInfo.album.image ? trackInfo.album.image[2]['#text']:'';
+                        this.selectedTrack.albumPictureUrl = trackInfo.album.image ? trackInfo.album.image[3]['#text']:'';
                         this.selectedTrack.audioUrl = trackInfo.url? trackInfo.url:'';
                     } else {
                         console.error('No track data found');
