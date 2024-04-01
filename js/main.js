@@ -29,39 +29,25 @@ createApp({
             error: ''
         };
     },
-
+        
     methods: {
-        fetchSongInfo(song) {
-            this.selectedTrack = song;
+            fetchSongInfo(gettoptracks){
+                this.selectedTrack.albumName=""
+                this.selectedTrack.albumPictureUrl="",
+                this.selectedTrack.audioUrl="",
+                this.error = false;
+                let music = gettoptracks;
+                let topMusic = music["crazyinlove.mp3","singleladies.mp3","irreplaceable.mp3","crazyinlove-ft-jayz.mp3","ifiwasaboy.mp3","sweetdreams.mp3","loveontop.mp3", "halo.mp3","cuffit.mp3","runtheworld.mp3"];
 
-            const API_KEY = '132bba6cefe591d8b6c9b76745bb1338';
-            const track = song.name;
+            
+                fetch(`http://localhost/songs-api/public/songs/${topMusic}`)
 
-            fetch(`https://ws.audioscrobbler.com/2.0/?method=track.getInfo&artist=beyonce&track=${track}&api_key=${API_KEY}&format=json`)
-                .then(response => response.json())
-                .then(data => {
-                    if (data.track) {
-                        const trackInfo = data.track;
-                        this.selectedTrack.albumName = trackInfo.album.title ? trackInfo.album.title[0]: 'Not available';
-                        this.selectedTrack.albumPictureUrl = trackInfo.album.image ? trackInfo.album.image[2]['#text']:'';
-                        this.selectedTrack.audioUrl = trackInfo.url? trackInfo.url:'';
-                    } else {
-                        console.error('No track data found');
-                        this.error = 'No track data found';
-                    }
-                })
-                .catch(error => {
-                    console.error('An error occurred while fetching track info from Last.fm:', error);
-                    this.error = "An error occurred while fetching track info from Last.fm.";
-                });
-
-            fetch(`http://localhost/songs-api/public/songs/${song.id}`)
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        this.selectedTrack.albumName = data.album.albumname ? data.album.albumname: 'Not available';
-                        this.selectedTrack.albumPictureUrl = data.picture.picturename ? data.album.albumname :'';
-                        this.selectedTrack.audioUrl = data.filename ? data.filename: '';
+                        this.selectedTrack.albumName = song.albumname ? song.albumname: 'Not available';
+                        this.selectedTrack.albumPictureUrl = song.pictureUrl ? song.albumname :'not available';
+                        this.selectedTrack.audioUrl = song.filename ? song.filename: 'not available';
                     } else {
                         console.error("error");
                         this.error = 'No data found from songs';
