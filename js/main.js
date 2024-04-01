@@ -31,6 +31,30 @@ createApp({
     },
         
     methods: {
+        fetchSongInfo(song) {
+            this.selectedTrack = song;
+
+            const API_KEY = '132bba6cefe591d8b6c9b76745bb1338';
+            const track = song.name;
+
+            fetch(`https://ws.audioscrobbler.com/2.0/?method=track.getInfo&artist=beyonce&track=${track}&api_key=${API_KEY}&format=json`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.track) {
+                        const trackInfo = data.track;
+                        this.selectedTrack.albumName = trackInfo.album.title ? trackInfo.album.title[0]: 'Not available';
+                        this.selectedTrack.albumPictureUrl = trackInfo.album.image ? trackInfo.album.image[2]['#text']:'';
+                        this.selectedTrack.audioUrl = trackInfo.url? trackInfo.url:'';
+                    } else {
+                        console.error('No track data found');
+                        this.error = 'No track data found';
+                    }
+                })
+                .catch(error => {
+                    console.error('An error occurred while fetching track info from Last.fm:', error);
+                    this.error = "An error occurred while fetching track info from Last.fm.";
+                });
+            },
             fetchSongInfo(gettoptracks){
                 this.selectedTrack.albumName=""
                 this.selectedTrack.albumPictureUrl="",
