@@ -29,7 +29,7 @@ createApp({
             error: ''
         };
     },
-
+        
     methods: {
         fetchSongInfo(song) {
             this.selectedTrack = song;
@@ -54,14 +54,24 @@ createApp({
                     console.error('An error occurred while fetching track info from Last.fm:', error);
                     this.error = "An error occurred while fetching track info from Last.fm.";
                 });
+            },
+            fetchSongInfo(gettoptracks){
+                this.selectedTrack.albumName=""
+                this.selectedTrack.albumPictureUrl="",
+                this.selectedTrack.audioUrl="",
+                this.error = false;
+                let music = gettoptracks;
+                let topMusic = music["crazyinlove.mp3","singleladies.mp3","irreplaceable.mp3","crazyinlove-ft-jayz.mp3","ifiwasaboy.mp3","sweetdreams.mp3","loveontop.mp3", "halo.mp3","cuffit.mp3","runtheworld.mp3"];
 
-            fetch(`http://localhost/songs-api/public/songs/${song.id}`)
+            
+                fetch(`http://localhost/songs-api/public/songs/${topMusic}`)
+
                 .then(response => response.json())
                 .then(data => {
                     if (data) {
-                        this.selectedTrack.albumName = data.album.albumname ? data.album.albumname: 'Not available';
-                        this.selectedTrack.albumPictureUrl = data.picture.picturename ? data.album.albumname :'';
-                        this.selectedTrack.audioUrl = data.filename ? data.filename: '';
+                        this.selectedTrack.albumName = song.albumname ? song.albumname: 'Not available';
+                        this.selectedTrack.albumPictureUrl = song.pictureUrl ? song.albumname :'not available';
+                        this.selectedTrack.audioUrl = song.filename ? song.filename: 'not available';
                     } else {
                         console.error("error");
                         this.error = 'No data found from songs';
